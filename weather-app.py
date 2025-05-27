@@ -35,7 +35,7 @@ def get_temperature(city_name, api_key):
             print("Error: Unexpected response structure.")
             return None
     except requests.exceptions.HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err} - {response.text}")
+        print(f"HTTP error occurred: {http_err}")
     except requests.exceptions.ConnectionError:
         print("Error: Network connection error.")
     except requests.exceptions.Timeout:
