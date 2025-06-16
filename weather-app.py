@@ -1,4 +1,5 @@
 import requests
+import os
 
 def get_temperature(city_name, api_key):
     """
@@ -48,7 +49,6 @@ def get_temperature(city_name, api_key):
     return None
 
 def main():
-    import os
     api_key = os.getenv('OPENWEATHER_API_KEY')
     if not api_key:
         print("Error: Please set the OPENWEATHER_API_KEY environment variable")
