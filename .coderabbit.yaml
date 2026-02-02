@@ -13,7 +13,8 @@ reviews:
     ignore_title_keywords: []
     labels: []
     drafts: false
-    base_branches: []
+    base_branches:
+      - ".*"
     ignore_usernames: []
   request_changes_workflow: false
   high_level_summary: true
