@@ -1,0 +1,73 @@
+language: "en-US"
+tone_instructions: ""
+early_access: false
+enable_free_tier: true
+
+reviews:
+  profile: "chill"
+  auto_review: true
+  auto_incremental_review: false
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_instructions: ""
+  high_level_summary_placeholder: "@coderabbitai summary"
+  high_level_summary_in_walkthrough: false
+  review_status: true
+  review_details: true
+  commit_status: true
+  collapse_walkthrough: true
+  changed_files_summary: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: true
+  suggested_reviewers: true
+  auto_apply_labels: false
+  auto_assign_reviewers: false
+  ignore_title_keywords: []
+  labels: []
+  drafts: false
+  base_branches: []
+  ignore_usernames: []
+  path_filters:
+    - "!**/bin/**"
+    - "!**/obj/**"
+    - "!**/Migrations/**"
+  path_instructions: []
+  in_progress_fortune: true
+  poem: false
+  enable_prompt_for_ai_agents: true
+  pre_merge_checks: {}
+  tools:
+    phpstan:
+      enabled: true
+    phpmd:
+      enabled: true
+
+chat:
+  art: true
+  auto_reply: true
+  integrations:
+    jira: "auto"
+    linear: "auto"
+
+knowledge_base:
+  opt_out: false
+  web_search: true
+  code_guidelines: true
+  learnings: "auto"
+  issues: "auto"
+  pull_requests: "auto"
+
+code_generation:
+  docstrings:
+    language: "en-US"
+
+issue_enrichment:
+  auto_enrich: false
+  planning: true
+  auto_planning: true
+  labeling_instructions: ""
+  auto_apply_labels: false
