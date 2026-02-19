@@ -1,0 +1,258 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: "en-US"  # ISO language code for reviews (supports 100+ locales)
+tone_instructions: ""  # Custom tone (max 250 chars). Example: "Be concise and direct"
+early_access: false  # Enable beta features
+enable_free_tier: true  # Allow free tier functionality
+inheritance: false  # Propagate parent settings upward
+
+# =============================================================================
+# REVIEWS CONFIGURATION
+# =============================================================================
+
+reviews:
+  # ---------------------------------------------------------------------------
+  # Core Review Settings
+  # ---------------------------------------------------------------------------
+  profile: "chill"  # "chill" (critical issues only) or "assertive" (comprehensive)
+
+  # Auto Review Controls
+  auto_review:
+    enabled: true  # Automatic PR analysis
+    description_keyword: "@coderabbitai review"  # Trigger via PR description
+    labels: []  # Include/exclude by labels
+    drafts: false  # Include draft PRs
+    base_branches: []  # Target specific branches
+    ignore_usernames: []  # Skip specific authors
+
+  auto_incremental_review: false  # Re-run on each commit push
+  auto_pause_after_reviewed_commits: 5  # Pause after N reviewed commits
+  request_changes_workflow: false  # Auto-approve when comments resolved
+
+  # ---------------------------------------------------------------------------
+  # Review Content & Output
+  # ---------------------------------------------------------------------------
+  high_level_summary: true
+  high_level_summary_instructions: ""
+  high_level_summary_placeholder: "@coderabbitai summary"
+  high_level_summary_in_walkthrough: false
+
+  review_status: true
+  review_details: true
+  commit_status: true
+  collapse_walkthrough: true
+
+  changed_files_summary: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+
+  in_progress_fortune: true
+  poem: false
+  enable_prompt_for_ai_agents: true
+
+  # ---------------------------------------------------------------------------
+  # Labels & Reviewers
+  # ---------------------------------------------------------------------------
+  suggested_labels: true  # Auto-identify labels
+  suggested_reviewers: true  # Auto-identify reviewers
+  auto_apply_labels: false  # Automatically tag PRs
+  auto_assign_reviewers: false  # Automatically assign reviewers
+
+  ignore_title_keywords: []  # Skip PRs with these title keywords
+  labels: []  # Custom label definitions
+  labeling_instructions: ""  # Define label suggestions with criteria
+
+  # ---------------------------------------------------------------------------
+  # Path-Specific Configuration
+  # ---------------------------------------------------------------------------
+  path_filters:
+    - "!**/bin/**"
+    - "!**/obj/**"
+    - "!**/Migrations/**"
+
+  path_instructions: []
+  # Example:
+  # - path: "src/**.ts"
+  #   instructions: "Focus on TypeScript best practices"
+
+  # ---------------------------------------------------------------------------
+  # Finishing Touches (NEW)
+  # Generate code improvements during review
+  # ---------------------------------------------------------------------------
+  finishing_touches:
+    docstrings:
+      enabled: false  # Generate/improve documentation
+    unit_tests:
+      enabled: false  # Create test cases for changes
+    # custom:  # Up to 5 custom recipes
+    #   - name: "Error Handling"
+    #     instructions: "Add comprehensive error handling"
+
+  # ---------------------------------------------------------------------------
+  # Pre-Merge Checks 
+  # Enforce requirements before merging
+  # ---------------------------------------------------------------------------
+  pre_merge_checks:
+    docstrings:
+      enabled: false  # Validate documentation coverage
+      threshold: 80  # Required coverage percentage (0-100)
+    title:
+      enabled: false  # Enforce PR title requirements
+    description:
+      enabled: false  # Validate PR description best practices
+    issue_assessment:
+      enabled: false  # Check linked issue alignment
+    # custom_checks:  # Up to 5 custom validation rules
+    #   - name: "No TODOs"
+    #     instructions: "Fail if code contains TODO comments"
+
+  # ---------------------------------------------------------------------------
+  # Tools Integration 
+  # Enable specific linters and analysis tools
+  # ---------------------------------------------------------------------------
+  tools:
+    # --- Your Current Tools ---
+    phpstan:
+      enabled: true
+    phpmd:
+      enabled: true
+
+    # --- Security Scanners ---
+    # gitleaks:
+    #   enabled: false  # Detect secrets and credentials
+    # trufflehog:
+    #   enabled: false  # Advanced secret detection
+    # trivy:
+    #   enabled: false  # Vulnerability scanner
+    # checkov:
+    #   enabled: false  # Infrastructure security
+    # osv_scanner:
+    #   enabled: false  # Open source vulnerability detection
+    # semgrep:
+    #   enabled: false  # SAST tool for security patterns
+
+    # --- JavaScript/TypeScript ---
+    # eslint:
+    #   enabled: false
+    # biome:
+    #   enabled: false  # Fast linter & formatter
+    # oxlint:
+    #   enabled: false  # Fast JavaScript linter
+
+    # --- Python ---
+    # ruff:
+    #   enabled: false  # Fast Python linter
+    # pylint:
+    #   enabled: false
+    # flake8:
+    #   enabled: false
+
+    # --- Go ---
+    # golangci_lint:
+    #   enabled: false
+
+    # --- Rust ---
+    # clippy:
+    #   enabled: false
+
+    # --- Ruby ---
+    # rubocop:
+    #   enabled: false
+    # brakeman:
+    #   enabled: false  # Security scanner for Rails
+
+    # --- Swift ---
+    # swiftlint:
+    #   enabled: false
+
+    # --- Infrastructure ---
+    # tflint:
+    #   enabled: false  # Terraform linter
+    # hadolint:
+    #   enabled: false  # Dockerfile linter
+    # buf:
+    #   enabled: false  # Protocol Buffer linter
+
+    # --- Other Languages ---
+    # shellcheck:
+    #   enabled: false  # Shell script analysis
+    # markdownlint:
+    #   enabled: false  # Markdown linting
+    # languagetool:
+    #   enabled: false  # Grammar and style checker
+    # ast_grep:
+    #   enabled: false  # Structural search tool
+    # detekt:
+    #   enabled: false  # Kotlin static analysis
+    # pmd:
+    #   enabled: false  # Java static analysis
+
+# =============================================================================
+# CHAT CONFIGURATION
+# =============================================================================
+
+chat:
+  art: true  # Generate ASCII/emoji decorations
+  auto_reply: true  # Respond without explicit mentions
+  integrations:
+    jira: "auto"  # Create Jira issues from chat ("auto"/"enabled"/"disabled")
+    linear: "auto"  # Create Linear issues from chat
+
+# =============================================================================
+# KNOWLEDGE BASE
+# =============================================================================
+
+knowledge_base:
+  opt_out: false  # Disable data retention features
+  web_search: true  # Incorporate web context in responses
+  code_guidelines: true  # Apply org standards via pattern-matched files
+
+  # Scope: "local" (current repo), "global" (across all repos), "auto"
+  learnings: "auto"  # Learn from past reviews
+  issues: "auto"  # Reference issue history
+  pull_requests: "auto"  # Reference PR history
+
+  # External Integrations (NEW)
+  # jira: "auto"  # Jira issue tracking integration
+  # linear: "auto"  # Linear issue tracking integration
+  # mcp: []  # Model Context Protocol servers
+  # linked_repositories: []  # Cross-repo awareness (max 1 repo)
+  #   - owner: "your-org"
+  #     name: "other-repo"
+
+# =============================================================================
+# CODE GENERATION
+# =============================================================================
+
+code_generation:
+  docstrings:
+    language: "en-US"  # Output language for generated docs
+    # path_instructions: []  # Custom rules per file pattern
+    #   - path: "src/**.py"
+    #     instructions: "Use Google-style docstrings"
+
+  # unit_tests:  # (NEW)
+  #   path_instructions: []
+  #     - path: "src/**.ts"
+  #       instructions: "Use Jest with AAA pattern"
+
+# =============================================================================
+# ISSUE ENRICHMENT
+# =============================================================================
+
+issue_enrichment:
+  auto_enrich:
+    enabled: false  # Analyze and enhance issues automatically
+
+  planning:
+    enabled: true  # Generate implementation roadmaps
+    auto_planning:
+      enabled: true  # Auto-generate plans
+      labels: []  # Trigger planning via these labels (NEW)
+        # - "needs-planning"
+
+  labeling_instructions: ""  # Custom label suggestion logic
+  auto_apply_labels: false  # Automatically apply suggested labels
