@@ -397,18 +397,24 @@ code_generation:
 # ==============================================================================
 issue_enrichment:
   # Automatically enrich issues when created/updated
-  auto_enrich: false
+  auto_enrich:
+    enabled: false
 
-  # Enable plan generation for issues
-  planning: true
-
-  # Automatically generate plans based on labels
-  auto_planning: true
+  # Plan generation for issues
+  planning:
+    enabled: true
+    # Automatically generate plans based on labels
+    auto_planning:
+      enabled: true
+      labels: []  # Trigger planning via these labels
 
   # Label management
   labeling:
-    # Custom label guidelines (array of strings)
+    # Custom label guidelines (array of objects with label and instructions)
     labeling_instructions: []
+    # Example:
+    # - label: "bug"
+    #   instructions: "Apply to defects and errors"
 
     # Automatically apply suggested labels to issues
     auto_apply_labels: false
