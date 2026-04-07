@@ -2,16 +2,14 @@ import requests
 
 def get_temperature(city_name, api_key):
     """
-    Fetches the current temperature in Fahrenheit for a given U.S. city
-    using the OpenWeatherMap API.
-
-    Parameters:
-        city_name (str): The name of the U.S. city.
-        api_key (str): Your OpenWeatherMap API key.
-
+    Retrieves the current temperature in Fahrenheit for a specified U.S. city using the OpenWeatherMap API.
+    
+    Args:
+        city_name: Name of the U.S. city.
+        api_key: OpenWeatherMap API key.
+    
     Returns:
-        float: Current temperature in Fahrenheit if successful.
-        None: If an error occurs or the data cannot be retrieved.
+        The current temperature in Fahrenheit as a float if successful, or None if an error occurs or data is unavailable.
     """
     if not api_key or not isinstance(api_key, str):
         print("Error: Invalid or missing API key.")
@@ -48,6 +46,11 @@ def get_temperature(city_name, api_key):
     return None
 
 def main():
+    """
+    Prompts the user for a U.S. city and displays its current temperature in Fahrenheit.
+    
+    Retrieves the OpenWeatherMap API key from the environment, requests the city name from the user, and prints the current temperature if available. Displays error messages for missing API key, empty city input, or failed data retrieval.
+    """
     import os
     api_key = os.getenv('OPENWEATHER_API_KEY')
     if not api_key:
